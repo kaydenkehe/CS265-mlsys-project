@@ -5,17 +5,22 @@
 # so changing batch size requires a fresh process.
 #
 # Usage:
-#   bash sweep.sh              # run all configurations
-#   bash sweep.sh Resnet152    # run only ResNet-152
-#   bash sweep.sh Bert         # run only BERT
+#   bash sweep.sh                       # all models → results/
+#   bash sweep.sh Resnet152             # one model  → results/
+#   bash sweep.sh all results_noac/     # all models → results_noac/
+#   bash sweep.sh Bert results_ac/      # one model  → results_ac/
 #
-# Results are saved as JSON files in the current directory.
-# If a run OOMs, it will print an error and continue to the next.
+# If a run OOMs, it prints an error and continues to the next.
 
 set -e
 
 RESNET152_BATCH_SIZES="2 4 8 16 32"
 BERT_BATCH_SIZES="2 4 8 16"
+
+FILTER=${1:-all}
+OUTDIR=${2:-results}
+
+mkdir -p "$OUTDIR"
 
 run_sweep() {
     local model=$1
@@ -23,22 +28,21 @@ run_sweep() {
     local batch_sizes=("$@")
 
     echo "=========================================="
-    echo "  Sweeping $model"
+    echo "  Sweeping $model → $OUTDIR/"
     echo "=========================================="
 
     for bs in "${batch_sizes[@]}"; do
         echo ""
         echo "--- $model  batch_size=$bs ---"
         if python benchmarks.py "$model" "$bs"; then
+            # move generated JSON into output directory
+            mv results_${model}_bs${bs}_*.json "$OUTDIR/" 2>/dev/null
             echo "--- $model bs=$bs completed ---"
         else
             echo "--- $model bs=$bs FAILED (likely OOM) ---"
         fi
     done
 }
-
-# allow filtering by model name
-FILTER=${1:-all}
 
 if [ "$FILTER" = "all" ] || [ "$FILTER" = "Resnet152" ]; then
     run_sweep Resnet152 $RESNET152_BATCH_SIZES
@@ -50,6 +54,6 @@ fi
 
 echo ""
 echo "=========================================="
-echo "  Sweep complete. JSON results:"
+echo "  Sweep complete. Results in $OUTDIR/:"
 echo "=========================================="
-ls -1 results_*.json 2>/dev/null || echo "No result files found."
+ls -1 "$OUTDIR"/*.json 2>/dev/null || echo "No result files found."

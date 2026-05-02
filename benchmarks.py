@@ -131,7 +131,7 @@ class Experiment:
                 optim.step()
                 optim.zero_grad()
 
-            self.optimizer = optim.Adam(self.model.parameters(), lr=1e-2, fused=True, capturable=True)
+            self.optimizer = optim.Adam(self.model.parameters(), lr=1e-2, foreach=True, capturable=True)
             self.train_step = resnet_train_step
 
         elif self.model_name == "Bert":
@@ -160,7 +160,7 @@ class Experiment:
                 optim.step()
                 optim.zero_grad()
                 
-            self.optimizer = optim.Adam(self.model.parameters(), lr=1e-2, fused=True, capturable=True)
+            self.optimizer = optim.Adam(self.model.parameters(), lr=1e-2, foreach=True, capturable=True)
             self.train_step = bert_train_step
 
     def loss_fn(self, logits: torch.Tensor, targets: torch.Tensor):

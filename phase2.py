@@ -114,17 +114,18 @@ def recompute_time_ms(profiler: GraphProfiler, subgraph: List[fx.Node]) -> float
 # Memory simulator
 # =============================================================================
 
-def simulate_peak_memory(profiler: GraphProfiler, evicted: Set[fx.Node]) -> int:
+def simulate_peak_memory(profiler: GraphProfiler, evicted: Set[fx.Node]) -> Tuple[int, int]:
     """
     Walk the graph in topological order, tracking the sum of live tensor sizes
-    at each step. Returns the maximum.
+    at each step. Returns (peak_bytes, peak_step) — the step index is needed by
+    the greedy algorithm so it can target activations alive at the peak moment.
 
     Liveness model per tensor T (with mem_delta(T) > 0 and at least one user):
       Non-evicted:     alive on [creation_step, last_user_step]
       Evicted (act A): alive on [creation_step, last_fwd_use_step]
                               and [first_bwd_use_step, last_bwd_use_step]
 
-    Breaks ties at the same step in favor of allocations
+    Breaks ties at the same step in favor of allocations.
     """
     # Baseline: placeholders (params, buffers, optimizer states, input batch)
     # are alive for the entire iteration. They have mem_delta == 0 because they
@@ -179,11 +180,13 @@ def simulate_peak_memory(profiler: GraphProfiler, evicted: Set[fx.Node]) -> int:
 
     current = baseline
     peak = baseline
-    for _, delta in events:
+    peak_step = 0
+    for step, delta in events:
         current += delta
         if current > peak:
             peak = current
-    return peak
+            peak_step = step
+    return peak, peak_step
 
 
 # =============================================================================
@@ -205,16 +208,29 @@ def run_mutwo_algorithm(
 
     evicted = set()
     candidates = set(activations)
-    peak = simulate_peak_memory(profiler, evicted)
+    peak, peak_step = simulate_peak_memory(profiler, evicted)
 
     while candidates and peak > memory_budget_bytes:
         # we keep all placeholders and all activations that haven't been evicted yet
         kept_base = placeholders | (activations - evicted)
 
+        # Only consider candidates whose freed window (last_fwd_use, first_bwd_use)
+        # contains the current peak step. Evicting outside this window doesn't
+        # change memory at the peak — so it can't reduce peak.
+        def helps_peak(cand: fx.Node) -> bool:
+            last_fwd_node = profiler.last_forward_access.get(cand)
+            # If cand has no forward user, its forward lifetime is just its creation step.
+            last_fwd = profiler.node_index[last_fwd_node] if last_fwd_node else profiler.node_index[cand]
+            first_bwd = profiler.node_index[profiler.first_backward_access[cand]]
+            return last_fwd < peak_step < first_bwd
+
         best = None # best candidate for eviction
         best_ratio = -1.0 # size / recompute_time ratio of the best candidate
 
         for cand in candidates:
+            if not helps_peak(cand):
+                continue
+
             # again, mem delta is an imperfect proxy for size
             size = profiler.avg_mem_deltas.get(cand.name, 0)
             if size <= 0:
@@ -233,13 +249,14 @@ def run_mutwo_algorithm(
                 best_ratio = ratio
                 best = cand
 
-        # we can't make progress
+        # No candidate spans the peak step (or every viable one had bad data) —
+        # we can't make further progress.
         if best is None:
             break
 
         evicted.add(best)
         candidates.remove(best)
-        peak = simulate_peak_memory(profiler, evicted)
+        peak, peak_step = simulate_peak_memory(profiler, evicted)
 
     # Finalize: compute each evicted activation's subgraph against the FINAL
     # kept set. This is what Phase 3 will paste into the backward pass.

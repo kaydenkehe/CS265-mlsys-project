@@ -216,8 +216,8 @@ class Experiment:
             )  # Output the results
 
             # Sanity: simulator should roughly match the measured peak with no eviction
-            sim_peak = simulate_peak_memory(graph_profiler, set())
-            print(f"Simulator (no AC): {sim_peak / 1024**2:.1f} MB")
+            sim_peak, peak_step = simulate_peak_memory(graph_profiler, set())
+            print(f"Simulator (no AC): {sim_peak / 1024**2:.1f} MB (peak at node index {peak_step})")
             print(f"Measured peak:     {graph_profiler.actual_peak_mem / 1024**2:.1f} MB")
 
             # Run AC with a budget below the measured peak

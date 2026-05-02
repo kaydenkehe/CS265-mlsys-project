@@ -34,9 +34,31 @@ Approximations (first cut, marked TODO inline):
     if multiple recomputed activations spike together).
 """
 
+import functools
+import operator
 from typing import List, Tuple, Set
 import torch.fx as fx
 from graph_prof import GraphProfiler, OP
+
+
+# =============================================================================
+# Helpers
+# =============================================================================
+
+def _output_size_bytes(node: fx.Node) -> int:
+    """
+    Byte size of a node's output tensor, read from FX metadata.
+    make_fx with tracing_mode='fake' attaches a FakeTensor to node.meta['val'],
+    which carries shape and dtype. Returns 0 if metadata is missing.
+    """
+    val = node.meta.get('val', None)
+    if val is None or not hasattr(val, 'shape') or not hasattr(val, 'dtype'):
+        return 0
+    try:
+        numel = functools.reduce(operator.mul, val.shape, 1)
+        return val.dtype.itemsize * numel
+    except Exception:
+        return 0
 
 
 # =============================================================================
@@ -104,9 +126,22 @@ def simulate_peak_memory(profiler: GraphProfiler, evicted: Set[fx.Node]) -> int:
 
     Breaks ties at the same step in favor of allocations
     """
+    # Baseline: placeholders (params, buffers, optimizer states, input batch)
+    # are alive for the entire iteration. They have mem_delta == 0 because they
+    # were allocated before tracing, so they don't appear in avg_mem_deltas.
+    # We pull their size from FX's tensor metadata instead.
+    baseline = sum(
+        _output_size_bytes(n)
+        for n in profiler.module.graph.nodes
+        if n.op == OP.PLACEHOLDER
+    )
+
     events = []  # (step, signed_delta)
 
     for node in profiler.module.graph.nodes:
+        if node.op == OP.PLACEHOLDER:
+            continue  # already counted in baseline
+
         # proxy for the size of the tensor produced by a node
         size = profiler.avg_mem_deltas.get(node.name, 0)
 
@@ -142,8 +177,8 @@ def simulate_peak_memory(profiler: GraphProfiler, evicted: Set[fx.Node]) -> int:
     # sort by step, breaking ties in favor of smaller -e[1] (i.e., +alloc before -free)
     events.sort(key=lambda e: (e[0], -e[1]))
 
-    current = 0
-    peak = 0
+    current = baseline
+    peak = baseline
     for _, delta in events:
         current += delta
         if current > peak:

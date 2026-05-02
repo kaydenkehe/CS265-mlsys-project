@@ -34,7 +34,7 @@ Approximations (first cut, marked TODO inline):
     if multiple recomputed activations spike together).
 """
 
-from typing import List, Tuple
+from typing import List, Tuple, Set
 import torch.fx as fx
 from graph_prof import GraphProfiler, OP
 

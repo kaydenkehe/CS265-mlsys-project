@@ -1,0 +1,8 @@
+torch==2.5.1
+torchvision==0.20.1
+numpy==2.2.2
+transformers>=4.45,<5
+matplotlib>=3.7
+tabulate>=0.9
+hypothesis>=6
+expecttest>=0.2

@@ -1,0 +1,793 @@
+{
+  "overview": {
+    "model_name": "Bert",
+    "total_graph_nodes": 4352,
+    "num_activations": 324,
+    "node_type_counts": {
+      "PARAM": 201,
+      "OTHER": 3626,
+      "ACT": 324,
+      "GRAD": 201
+    },
+    "unique_op_types": 36
+  },
+  "batch_size_results": [
+    {
+      "batch_size": 2,
+      "forward_time_ms": 44.6,
+      "backward_time_ms": 134.37,
+      "total_time_ms": 178.96,
+      "backward_to_forward_ratio": 3.01,
+      "peak_gpu_memory_mb": 3362.4,
+      "peak_graph_memory_mb": 2631.7,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 18.8,
+      "gradient_memory_mb": 91.7,
+      "other_memory_mb": 2521.2,
+      "activation_pct_of_positive_allocs": 0.7
+    },
+    {
+      "batch_size": 4,
+      "forward_time_ms": 45.52,
+      "backward_time_ms": 134.67,
+      "total_time_ms": 180.19,
+      "backward_to_forward_ratio": 2.96,
+      "peak_gpu_memory_mb": 3364.9,
+      "peak_graph_memory_mb": 3288.9,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 44.5,
+      "gradient_memory_mb": 91.7,
+      "other_memory_mb": 3152.8,
+      "activation_pct_of_positive_allocs": 1.4
+    },
+    {
+      "batch_size": 8,
+      "forward_time_ms": 49.66,
+      "backward_time_ms": 142.38,
+      "total_time_ms": 192.05,
+      "backward_to_forward_ratio": 2.87,
+      "peak_gpu_memory_mb": 3381.6,
+      "peak_graph_memory_mb": 4282.7,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 75.0,
+      "gradient_memory_mb": 91.7,
+      "other_memory_mb": 4116.0,
+      "activation_pct_of_positive_allocs": 1.8
+    },
+    {
+      "batch_size": 16,
+      "forward_time_ms": 62.5,
+      "backward_time_ms": 168.69,
+      "total_time_ms": 231.19,
+      "backward_to_forward_ratio": 2.7,
+      "peak_gpu_memory_mb": 3367.9,
+      "peak_graph_memory_mb": 6377.6,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 150.0,
+      "gradient_memory_mb": 91.7,
+      "other_memory_mb": 6135.9,
+      "activation_pct_of_positive_allocs": 2.4
+    },
+    {
+      "batch_size": 32,
+      "forward_time_ms": 86.53,
+      "backward_time_ms": 219.89,
+      "total_time_ms": 306.42,
+      "backward_to_forward_ratio": 2.54,
+      "peak_gpu_memory_mb": 3644.7,
+      "peak_graph_memory_mb": 10710.8,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 300.1,
+      "gradient_memory_mb": 91.7,
+      "other_memory_mb": 10319.0,
+      "activation_pct_of_positive_allocs": 2.8
+    },
+    {
+      "batch_size": 64,
+      "forward_time_ms": 130.09,
+      "backward_time_ms": 312.12,
+      "total_time_ms": 442.21,
+      "backward_to_forward_ratio": 2.4,
+      "peak_gpu_memory_mb": 6011.7,
+      "peak_graph_memory_mb": 19188.1,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 600.2,
+      "gradient_memory_mb": 92.2,
+      "other_memory_mb": 18495.8,
+      "activation_pct_of_positive_allocs": 3.1
+    },
+    {
+      "batch_size": 128,
+      "forward_time_ms": 210.5,
+      "backward_time_ms": 478.71,
+      "total_time_ms": 689.21,
+      "backward_to_forward_ratio": 2.27,
+      "peak_gpu_memory_mb": 10745.8,
+      "peak_graph_memory_mb": 36306.4,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 1200.4,
+      "gradient_memory_mb": 92.2,
+      "other_memory_mb": 35013.9,
+      "activation_pct_of_positive_allocs": 3.3
+    },
+    {
+      "batch_size": 256,
+      "forward_time_ms": 386.45,
+      "backward_time_ms": 830.59,
+      "total_time_ms": 1217.03,
+      "backward_to_forward_ratio": 2.15,
+      "peak_gpu_memory_mb": 20219.9,
+      "peak_graph_memory_mb": 70486.2,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 2400.8,
+      "gradient_memory_mb": 92.2,
+      "other_memory_mb": 67993.3,
+      "activation_pct_of_positive_allocs": 3.4
+    },
+    {
+      "batch_size": 512,
+      "forward_time_ms": 741.16,
+      "backward_time_ms": 1532.27,
+      "total_time_ms": 2273.43,
+      "backward_to_forward_ratio": 2.07,
+      "peak_gpu_memory_mb": 39150.7,
+      "peak_graph_memory_mb": 138882.9,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 4802.0,
+      "gradient_memory_mb": 91.6,
+      "other_memory_mb": 133989.4,
+      "activation_pct_of_positive_allocs": 3.5
+    }
+  ],
+  "scaling_analysis": {
+    "activation_memory_per_sample_mb": {
+      "2": 9.4,
+      "4": 11.12,
+      "8": 9.38,
+      "16": 9.38,
+      "32": 9.38,
+      "64": 9.38,
+      "128": 9.38,
+      "256": 9.38,
+      "512": 9.38
+    },
+    "gpu_memory_per_sample_mb": {
+      "2": 1681.2,
+      "4": 841.23,
+      "8": 422.7,
+      "16": 210.49,
+      "32": 113.9,
+      "64": 93.93,
+      "128": 83.95,
+      "256": 78.98,
+      "512": 76.47
+    },
+    "memory_doubling_factors": [
+      {
+        "from_bs": 2,
+        "to_bs": 4,
+        "gpu_memory_factor": 1.0,
+        "activation_memory_factor": 2.37
+      },
+      {
+        "from_bs": 4,
+        "to_bs": 8,
+        "gpu_memory_factor": 1.0,
+        "activation_memory_factor": 1.69
+      },
+      {
+        "from_bs": 8,
+        "to_bs": 16,
+        "gpu_memory_factor": 1.0,
+        "activation_memory_factor": 2.0
+      },
+      {
+        "from_bs": 16,
+        "to_bs": 32,
+        "gpu_memory_factor": 1.08,
+        "activation_memory_factor": 2.0
+      },
+      {
+        "from_bs": 32,
+        "to_bs": 64,
+        "gpu_memory_factor": 1.65,
+        "activation_memory_factor": 2.0
+      },
+      {
+        "from_bs": 64,
+        "to_bs": 128,
+        "gpu_memory_factor": 1.79,
+        "activation_memory_factor": 2.0
+      },
+      {
+        "from_bs": 128,
+        "to_bs": 256,
+        "gpu_memory_factor": 1.88,
+        "activation_memory_factor": 2.0
+      },
+      {
+        "from_bs": 256,
+        "to_bs": 512,
+        "gpu_memory_factor": 1.94,
+        "activation_memory_factor": 2.0
+      }
+    ]
+  },
+  "timing_analysis": {
+    "backward_to_forward_ratio_by_bs": {
+      "2": 3.01,
+      "4": 2.96,
+      "8": 2.87,
+      "16": 2.7,
+      "32": 2.54,
+      "64": 2.4,
+      "128": 2.27,
+      "256": 2.15,
+      "512": 2.07
+    },
+    "top_20_slowest_ops": {
+      "batch_size": 32,
+      "ops": [
+        {
+          "name": "_fused_adam",
+          "op": "aten._fused_adam",
+          "type": "OTHER",
+          "time_ms": 18.3236
+        },
+        {
+          "name": "addmm_46",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1284
+        },
+        {
+          "name": "addmm_4",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.128
+        },
+        {
+          "name": "addmm_10",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1227
+        },
+        {
+          "name": "addmm_52",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1215
+        },
+        {
+          "name": "addmm_28",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1209
+        },
+        {
+          "name": "addmm_34",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1208
+        },
+        {
+          "name": "addmm_16",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1192
+        },
+        {
+          "name": "addmm_64",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.117
+        },
+        {
+          "name": "addmm_22",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1156
+        },
+        {
+          "name": "addmm_58",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1143
+        },
+        {
+          "name": "addmm_40",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1103
+        },
+        {
+          "name": "addmm_70",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.1102
+        },
+        {
+          "name": "addmm_5",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.068
+        },
+        {
+          "name": "addmm_11",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.0639
+        },
+        {
+          "name": "addmm_23",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.0634
+        },
+        {
+          "name": "addmm_17",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.062
+        },
+        {
+          "name": "addmm_59",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.0614
+        },
+        {
+          "name": "addmm_29",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.06
+        },
+        {
+          "name": "addmm_47",
+          "op": "aten.addmm",
+          "type": "OTHER",
+          "time_ms": 1.0599
+        }
+      ]
+    },
+    "time_by_op_type": {
+      "batch_size": 32,
+      "distribution": {
+        "aten.mm": {
+          "time_ms": 76.42,
+          "pct": 24.9
+        },
+        "aten.addmm": {
+          "time_ms": 42.58,
+          "pct": 13.9
+        },
+        "aten.copy_": {
+          "time_ms": 33.84,
+          "pct": 11.0
+        },
+        "<built-in function getitem>": {
+          "time_ms": 19.49,
+          "pct": 6.4
+        },
+        "aten._fused_adam": {
+          "time_ms": 18.32,
+          "pct": 6.0
+        },
+        "aten.view": {
+          "time_ms": 18.1,
+          "pct": 5.9
+        },
+        "input": {
+          "time_ms": 16.77,
+          "pct": 5.5
+        },
+        "aten.sum": {
+          "time_ms": 13.96,
+          "pct": 4.6
+        },
+        "aten.mul": {
+          "time_ms": 13.89,
+          "pct": 4.5
+        },
+        "aten.t": {
+          "time_ms": 12.24,
+          "pct": 4.0
+        },
+        "aten._scaled_dot_product_efficient_attention_backward": {
+          "time_ms": 7.9,
+          "pct": 2.6
+        },
+        "aten.add": {
+          "time_ms": 7.23,
+          "pct": 2.4
+        },
+        "aten.sub": {
+          "time_ms": 6.15,
+          "pct": 2.0
+        },
+        "aten._scaled_dot_product_efficient_attention": {
+          "time_ms": 3.84,
+          "pct": 1.3
+        },
+        "aten.gelu_backward": {
+          "time_ms": 3.54,
+          "pct": 1.2
+        },
+        "aten.transpose": {
+          "time_ms": 3.39,
+          "pct": 1.1
+        },
+        "aten.gelu": {
+          "time_ms": 2.58,
+          "pct": 0.8
+        },
+        "aten.native_layer_norm": {
+          "time_ms": 2.42,
+          "pct": 0.8
+        },
+        "aten.div": {
+          "time_ms": 1.22,
+          "pct": 0.4
+        },
+        "aten.embedding_dense_backward": {
+          "time_ms": 0.78,
+          "pct": 0.3
+        },
+        "aten._foreach_add": {
+          "time_ms": 0.54,
+          "pct": 0.2
+        },
+        "aten.embedding": {
+          "time_ms": 0.3,
+          "pct": 0.1
+        },
+        "aten.expand": {
+          "time_ms": 0.11,
+          "pct": 0.0
+        },
+        "aten.select_backward": {
+          "time_ms": 0.11,
+          "pct": 0.0
+        },
+        "aten.gather": {
+          "time_ms": 0.09,
+          "pct": 0.0
+        },
+        "aten.ones_like": {
+          "time_ms": 0.08,
+          "pct": 0.0
+        },
+        "aten.nll_loss_backward": {
+          "time_ms": 0.08,
+          "pct": 0.0
+        },
+        "aten.slice": {
+          "time_ms": 0.07,
+          "pct": 0.0
+        },
+        "aten.tanh": {
+          "time_ms": 0.07,
+          "pct": 0.0
+        },
+        "aten._log_softmax": {
+          "time_ms": 0.07,
+          "pct": 0.0
+        },
+        "aten.nll_loss_forward": {
+          "time_ms": 0.07,
+          "pct": 0.0
+        },
+        "aten.tanh_backward": {
+          "time_ms": 0.06,
+          "pct": 0.0
+        },
+        "aten._log_softmax_backward_data": {
+          "time_ms": 0.06,
+          "pct": 0.0
+        },
+        "sep.sep": {
+          "time_ms": 0.04,
+          "pct": 0.0
+        },
+        "aten.select": {
+          "time_ms": 0.04,
+          "pct": 0.0
+        },
+        "sep.sep_backward": {
+          "time_ms": 0.04,
+          "pct": 0.0
+        }
+      }
+    }
+  },
+  "activation_analysis": {
+    "idle_gap_stats": {
+      "min": 0,
+      "max": 1922,
+      "mean": 699.5,
+      "median": 596
+    },
+    "top_15_by_idle_gap": [
+      {
+        "name": "expand_1",
+        "idle_gap": 1922,
+        "last_forward_use": "embedding_1",
+        "first_backward_use": "embedding_dense_backward_1"
+      },
+      {
+        "name": "slice_1",
+        "idle_gap": 1919,
+        "last_forward_use": "embedding_2",
+        "first_backward_use": "embedding_dense_backward"
+      },
+      {
+        "name": "add_1",
+        "idle_gap": 1901,
+        "last_forward_use": "native_layer_norm",
+        "first_backward_use": "sub_72"
+      },
+      {
+        "name": "view",
+        "idle_gap": 1888,
+        "last_forward_use": "addmm",
+        "first_backward_use": "mm_147"
+      },
+      {
+        "name": "t",
+        "idle_gap": 1885,
+        "last_forward_use": "addmm",
+        "first_backward_use": "t_366"
+      },
+      {
+        "name": "view_3",
+        "idle_gap": 1869,
+        "last_forward_use": "addmm_1",
+        "first_backward_use": "mm_145"
+      },
+      {
+        "name": "t_1",
+        "idle_gap": 1866,
+        "last_forward_use": "addmm_1",
+        "first_backward_use": "t_362"
+      },
+      {
+        "name": "view_6",
+        "idle_gap": 1850,
+        "last_forward_use": "addmm_2",
+        "first_backward_use": "mm_143"
+      },
+      {
+        "name": "t_2",
+        "idle_gap": 1847,
+        "last_forward_use": "addmm_2",
+        "first_backward_use": "t_358"
+      },
+      {
+        "name": "transpose",
+        "idle_gap": 1836,
+        "last_forward_use": "_scaled_dot_product_efficient_attention",
+        "first_backward_use": "_scaled_dot_product_efficient_attention_backward_11"
+      },
+      {
+        "name": "transpose_1",
+        "idle_gap": 1836,
+        "last_forward_use": "_scaled_dot_product_efficient_attention",
+        "first_backward_use": "_scaled_dot_product_efficient_attention_backward_11"
+      },
+      {
+        "name": "transpose_2",
+        "idle_gap": 1836,
+        "last_forward_use": "_scaled_dot_product_efficient_attention",
+        "first_backward_use": "_scaled_dot_product_efficient_attention_backward_11"
+      },
+      {
+        "name": "getitem_3",
+        "idle_gap": 1831,
+        "last_forward_use": "transpose_3",
+        "first_backward_use": "_scaled_dot_product_efficient_attention_backward_11"
+      },
+      {
+        "name": "view_10",
+        "idle_gap": 1819,
+        "last_forward_use": "addmm_3",
+        "first_backward_use": "mm_141"
+      },
+      {
+        "name": "t_3",
+        "idle_gap": 1816,
+        "last_forward_use": "addmm_3",
+        "first_backward_use": "t_354"
+      }
+    ],
+    "top_15_by_size": {
+      "batch_size": 32,
+      "activations": [
+        {
+          "name": "add_1",
+          "size_mb": 12.0,
+          "idle_gap": 1901
+        },
+        {
+          "name": "add_2",
+          "size_mb": 12.0,
+          "idle_gap": 1797
+        },
+        {
+          "name": "add_3",
+          "size_mb": 12.0,
+          "idle_gap": 1746
+        },
+        {
+          "name": "add_4",
+          "size_mb": 12.0,
+          "idle_gap": 1642
+        },
+        {
+          "name": "add_5",
+          "size_mb": 12.0,
+          "idle_gap": 1591
+        },
+        {
+          "name": "add_6",
+          "size_mb": 12.0,
+          "idle_gap": 1487
+        },
+        {
+          "name": "add_7",
+          "size_mb": 12.0,
+          "idle_gap": 1436
+        },
+        {
+          "name": "add_8",
+          "size_mb": 12.0,
+          "idle_gap": 1332
+        },
+        {
+          "name": "add_9",
+          "size_mb": 12.0,
+          "idle_gap": 1281
+        },
+        {
+          "name": "add_10",
+          "size_mb": 12.0,
+          "idle_gap": 1177
+        },
+        {
+          "name": "add_11",
+          "size_mb": 12.0,
+          "idle_gap": 1126
+        },
+        {
+          "name": "add_12",
+          "size_mb": 12.0,
+          "idle_gap": 1022
+        },
+        {
+          "name": "add_13",
+          "size_mb": 12.0,
+          "idle_gap": 971
+        },
+        {
+          "name": "add_14",
+          "size_mb": 12.0,
+          "idle_gap": 867
+        },
+        {
+          "name": "add_15",
+          "size_mb": 12.0,
+          "idle_gap": 816
+        }
+      ]
+    },
+    "top_15_ac_candidates": {
+      "batch_size": 32,
+      "note": "Ranked by size_mb * idle_gap \u2014 activations that are both large and idle longest",
+      "activations": [
+        {
+          "name": "add_1",
+          "size_mb": 12.0,
+          "idle_gap": 1901,
+          "score": 22812.0
+        },
+        {
+          "name": "add_2",
+          "size_mb": 12.0,
+          "idle_gap": 1797,
+          "score": 21564.0
+        },
+        {
+          "name": "add_3",
+          "size_mb": 12.0,
+          "idle_gap": 1746,
+          "score": 20952.0
+        },
+        {
+          "name": "add_4",
+          "size_mb": 12.0,
+          "idle_gap": 1642,
+          "score": 19704.0
+        },
+        {
+          "name": "add_5",
+          "size_mb": 12.0,
+          "idle_gap": 1591,
+          "score": 19092.0
+        },
+        {
+          "name": "add_6",
+          "size_mb": 12.0,
+          "idle_gap": 1487,
+          "score": 17844.0
+        },
+        {
+          "name": "add_7",
+          "size_mb": 12.0,
+          "idle_gap": 1436,
+          "score": 17232.0
+        },
+        {
+          "name": "add_8",
+          "size_mb": 12.0,
+          "idle_gap": 1332,
+          "score": 15984.0
+        },
+        {
+          "name": "add_9",
+          "size_mb": 12.0,
+          "idle_gap": 1281,
+          "score": 15372.0
+        },
+        {
+          "name": "add_10",
+          "size_mb": 12.0,
+          "idle_gap": 1177,
+          "score": 14124.0
+        },
+        {
+          "name": "add_11",
+          "size_mb": 12.0,
+          "idle_gap": 1126,
+          "score": 13512.0
+        },
+        {
+          "name": "add_12",
+          "size_mb": 12.0,
+          "idle_gap": 1022,
+          "score": 12264.0
+        },
+        {
+          "name": "add_13",
+          "size_mb": 12.0,
+          "idle_gap": 971,
+          "score": 11652.0
+        },
+        {
+          "name": "add_14",
+          "size_mb": 12.0,
+          "idle_gap": 867,
+          "score": 10404.0
+        },
+        {
+          "name": "add_15",
+          "size_mb": 12.0,
+          "idle_gap": 816,
+          "score": 9792.0
+        }
+      ]
+    },
+    "theoretical_max_savings": {
+      "batch_size": 32,
+      "total_activation_memory_mb": 300.1,
+      "peak_gpu_memory_mb": 3644.7,
+      "activation_pct_of_gpu_peak": 8.2,
+      "note": "If all activations were checkpointed (recomputed instead of stored), this is the maximum memory reduction as a fraction of peak GPU memory."
+    }
+  },
+  "observations": [
+    "Activation memory per sample varies across batch sizes (range: 9.38-11.12 MB).",
+    "Backward pass takes ~2.6x longer than forward on average.",
+    "Activations account for 1-4% of positive memory allocations across batch sizes.",
+    "Peak GPU memory at BS=512: 39151 MB.",
+    "Graph has 324 activations with mean idle gap of 699 nodes."
+  ]
+}

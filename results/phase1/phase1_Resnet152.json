@@ -1,0 +1,746 @@
+{
+  "overview": {
+    "model_name": "Resnet152",
+    "total_graph_nodes": 8681,
+    "num_activations": 778,
+    "node_type_counts": {
+      "PARAM": 467,
+      "OTHER": 6969,
+      "ACT": 778,
+      "GRAD": 467
+    },
+    "unique_op_types": 30
+  },
+  "batch_size_results": [
+    {
+      "batch_size": 2,
+      "forward_time_ms": 97.53,
+      "backward_time_ms": 176.83,
+      "total_time_ms": 274.35,
+      "backward_to_forward_ratio": 1.81,
+      "peak_gpu_memory_mb": 1884.4,
+      "peak_graph_memory_mb": 2169.9,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 175.7,
+      "gradient_memory_mb": 0.0,
+      "other_memory_mb": 1994.2,
+      "activation_pct_of_positive_allocs": 8.1
+    },
+    {
+      "batch_size": 4,
+      "forward_time_ms": 98.52,
+      "backward_time_ms": 177.3,
+      "total_time_ms": 275.82,
+      "backward_to_forward_ratio": 1.8,
+      "peak_gpu_memory_mb": 1884.0,
+      "peak_graph_memory_mb": 3137.6,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 347.7,
+      "gradient_memory_mb": 0.0,
+      "other_memory_mb": 2789.9,
+      "activation_pct_of_positive_allocs": 11.1
+    },
+    {
+      "batch_size": 8,
+      "forward_time_ms": 101.6,
+      "backward_time_ms": 190.54,
+      "total_time_ms": 292.13,
+      "backward_to_forward_ratio": 1.88,
+      "peak_gpu_memory_mb": 2126.1,
+      "peak_graph_memory_mb": 5050.6,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 694.9,
+      "gradient_memory_mb": 0.0,
+      "other_memory_mb": 4355.7,
+      "activation_pct_of_positive_allocs": 13.8
+    },
+    {
+      "batch_size": 16,
+      "forward_time_ms": 113.95,
+      "backward_time_ms": 213.78,
+      "total_time_ms": 327.72,
+      "backward_to_forward_ratio": 1.88,
+      "peak_gpu_memory_mb": 3465.6,
+      "peak_graph_memory_mb": 8872.2,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 1382.8,
+      "gradient_memory_mb": 0.0,
+      "other_memory_mb": 7489.4,
+      "activation_pct_of_positive_allocs": 15.6
+    },
+    {
+      "batch_size": 32,
+      "forward_time_ms": 144.06,
+      "backward_time_ms": 277.4,
+      "total_time_ms": 421.46,
+      "backward_to_forward_ratio": 1.93,
+      "peak_gpu_memory_mb": 6176.8,
+      "peak_graph_memory_mb": 16589.7,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 2767.2,
+      "gradient_memory_mb": 0.0,
+      "other_memory_mb": 13822.5,
+      "activation_pct_of_positive_allocs": 16.7
+    },
+    {
+      "batch_size": 64,
+      "forward_time_ms": 198.52,
+      "backward_time_ms": 379.18,
+      "total_time_ms": 577.69,
+      "backward_to_forward_ratio": 1.91,
+      "peak_gpu_memory_mb": 11669.8,
+      "peak_graph_memory_mb": 31922.4,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 5549.0,
+      "gradient_memory_mb": 0.0,
+      "other_memory_mb": 26373.4,
+      "activation_pct_of_positive_allocs": 17.4
+    },
+    {
+      "batch_size": 128,
+      "forward_time_ms": 320.72,
+      "backward_time_ms": 608.39,
+      "total_time_ms": 929.11,
+      "backward_to_forward_ratio": 1.9,
+      "peak_gpu_memory_mb": 22495.9,
+      "peak_graph_memory_mb": 62437.7,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 11028.2,
+      "gradient_memory_mb": 0.0,
+      "other_memory_mb": 51409.4,
+      "activation_pct_of_positive_allocs": 17.7
+    },
+    {
+      "batch_size": 256,
+      "forward_time_ms": 594.48,
+      "backward_time_ms": 1398.21,
+      "total_time_ms": 1992.68,
+      "backward_to_forward_ratio": 2.35,
+      "peak_gpu_memory_mb": 44278.4,
+      "peak_graph_memory_mb": 123879.7,
+      "peak_node": "_fused_adam",
+      "activation_memory_mb": 22054.5,
+      "gradient_memory_mb": 0.0,
+      "other_memory_mb": 101825.2,
+      "activation_pct_of_positive_allocs": 17.8
+    }
+  ],
+  "scaling_analysis": {
+    "activation_memory_per_sample_mb": {
+      "2": 87.85,
+      "4": 86.92,
+      "8": 86.86,
+      "16": 86.42,
+      "32": 86.47,
+      "64": 86.7,
+      "128": 86.16,
+      "256": 86.15
+    },
+    "gpu_memory_per_sample_mb": {
+      "2": 942.2,
+      "4": 471.0,
+      "8": 265.76,
+      "16": 216.6,
+      "32": 193.03,
+      "64": 182.34,
+      "128": 175.75,
+      "256": 172.96
+    },
+    "memory_doubling_factors": [
+      {
+        "from_bs": 2,
+        "to_bs": 4,
+        "gpu_memory_factor": 1.0,
+        "activation_memory_factor": 1.98
+      },
+      {
+        "from_bs": 4,
+        "to_bs": 8,
+        "gpu_memory_factor": 1.13,
+        "activation_memory_factor": 2.0
+      },
+      {
+        "from_bs": 8,
+        "to_bs": 16,
+        "gpu_memory_factor": 1.63,
+        "activation_memory_factor": 1.99
+      },
+      {
+        "from_bs": 16,
+        "to_bs": 32,
+        "gpu_memory_factor": 1.78,
+        "activation_memory_factor": 2.0
+      },
+      {
+        "from_bs": 32,
+        "to_bs": 64,
+        "gpu_memory_factor": 1.89,
+        "activation_memory_factor": 2.01
+      },
+      {
+        "from_bs": 64,
+        "to_bs": 128,
+        "gpu_memory_factor": 1.93,
+        "activation_memory_factor": 1.99
+      },
+      {
+        "from_bs": 128,
+        "to_bs": 256,
+        "gpu_memory_factor": 1.97,
+        "activation_memory_factor": 2.0
+      }
+    ]
+  },
+  "timing_analysis": {
+    "backward_to_forward_ratio_by_bs": {
+      "2": 1.81,
+      "4": 1.8,
+      "8": 1.88,
+      "16": 1.88,
+      "32": 1.93,
+      "64": 1.91,
+      "128": 1.9,
+      "256": 2.35
+    },
+    "top_20_slowest_ops": {
+      "batch_size": 32,
+      "ops": [
+        {
+          "name": "_fused_adam",
+          "op": "aten._fused_adam",
+          "type": "OTHER",
+          "time_ms": 22.4445
+        },
+        {
+          "name": "convolution_backward_140",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 1.3308
+        },
+        {
+          "name": "_foreach_add",
+          "op": "aten._foreach_add",
+          "type": "OTHER",
+          "time_ms": 1.179
+        },
+        {
+          "name": "convolution_backward_115",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 1.0689
+        },
+        {
+          "name": "cudnn_batch_norm_backward_144",
+          "op": "aten.cudnn_batch_norm_backward",
+          "type": "OTHER",
+          "time_ms": 1.046
+        },
+        {
+          "name": "cudnn_batch_norm_backward_150",
+          "op": "aten.cudnn_batch_norm_backward",
+          "type": "OTHER",
+          "time_ms": 1.0393
+        },
+        {
+          "name": "cudnn_batch_norm_backward_151",
+          "op": "aten.cudnn_batch_norm_backward",
+          "type": "OTHER",
+          "time_ms": 1.0355
+        },
+        {
+          "name": "cudnn_batch_norm_backward_147",
+          "op": "aten.cudnn_batch_norm_backward",
+          "type": "OTHER",
+          "time_ms": 1.034
+        },
+        {
+          "name": "cudnn_batch_norm_backward_154",
+          "op": "aten.cudnn_batch_norm_backward",
+          "type": "OTHER",
+          "time_ms": 0.9926
+        },
+        {
+          "name": "convolution_backward_142",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 0.9852
+        },
+        {
+          "name": "convolution_backward_154",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 0.9053
+        },
+        {
+          "name": "convolution_backward_6",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 0.8844
+        },
+        {
+          "name": "convolution_backward_145",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 0.8558
+        },
+        {
+          "name": "convolution_backward_152",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 0.8544
+        },
+        {
+          "name": "convolution_backward_148",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 0.8522
+        },
+        {
+          "name": "convolution",
+          "op": "aten.convolution",
+          "type": "ACT",
+          "time_ms": 0.7921
+        },
+        {
+          "name": "max_pool2d_with_indices_backward",
+          "op": "aten.max_pool2d_with_indices_backward",
+          "type": "OTHER",
+          "time_ms": 0.7801
+        },
+        {
+          "name": "convolution_backward_143",
+          "op": "aten.convolution_backward",
+          "type": "OTHER",
+          "time_ms": 0.6779
+        },
+        {
+          "name": "cudnn_batch_norm",
+          "op": "aten.cudnn_batch_norm",
+          "type": "OTHER",
+          "time_ms": 0.6732
+        },
+        {
+          "name": "cudnn_batch_norm_10",
+          "op": "aten.cudnn_batch_norm",
+          "type": "OTHER",
+          "time_ms": 0.6551
+        }
+      ]
+    },
+    "time_by_op_type": {
+      "batch_size": 32,
+      "distribution": {
+        "aten.convolution_backward": {
+          "time_ms": 74.34,
+          "pct": 17.6
+        },
+        "aten.copy_": {
+          "time_ms": 65.65,
+          "pct": 15.6
+        },
+        "<built-in function getitem>": {
+          "time_ms": 59.7,
+          "pct": 14.2
+        },
+        "input": {
+          "time_ms": 40.11,
+          "pct": 9.5
+        },
+        "aten.convolution": {
+          "time_ms": 37.77,
+          "pct": 9.0
+        },
+        "aten.cudnn_batch_norm_backward": {
+          "time_ms": 34.3,
+          "pct": 8.1
+        },
+        "aten.cudnn_batch_norm": {
+          "time_ms": 22.57,
+          "pct": 5.4
+        },
+        "aten._fused_adam": {
+          "time_ms": 22.44,
+          "pct": 5.3
+        },
+        "aten.threshold_backward": {
+          "time_ms": 19.03,
+          "pct": 4.5
+        },
+        "aten.add_": {
+          "time_ms": 17.6,
+          "pct": 4.2
+        },
+        "aten.relu_": {
+          "time_ms": 13.28,
+          "pct": 3.2
+        },
+        "aten.add": {
+          "time_ms": 10.69,
+          "pct": 2.5
+        },
+        "aten._foreach_add": {
+          "time_ms": 1.18,
+          "pct": 0.3
+        },
+        "aten.max_pool2d_with_indices_backward": {
+          "time_ms": 0.78,
+          "pct": 0.2
+        },
+        "aten.max_pool2d_with_indices": {
+          "time_ms": 0.42,
+          "pct": 0.1
+        },
+        "aten.view": {
+          "time_ms": 0.28,
+          "pct": 0.1
+        },
+        "aten.addmm": {
+          "time_ms": 0.18,
+          "pct": 0.0
+        },
+        "aten.t": {
+          "time_ms": 0.17,
+          "pct": 0.0
+        },
+        "aten.mm": {
+          "time_ms": 0.17,
+          "pct": 0.0
+        },
+        "aten.mean": {
+          "time_ms": 0.11,
+          "pct": 0.0
+        },
+        "aten.ones_like": {
+          "time_ms": 0.09,
+          "pct": 0.0
+        },
+        "aten.div": {
+          "time_ms": 0.09,
+          "pct": 0.0
+        },
+        "aten.sum": {
+          "time_ms": 0.08,
+          "pct": 0.0
+        },
+        "aten.nll_loss_forward": {
+          "time_ms": 0.08,
+          "pct": 0.0
+        },
+        "aten.nll_loss_backward": {
+          "time_ms": 0.07,
+          "pct": 0.0
+        },
+        "aten._log_softmax_backward_data": {
+          "time_ms": 0.06,
+          "pct": 0.0
+        },
+        "aten._log_softmax": {
+          "time_ms": 0.06,
+          "pct": 0.0
+        },
+        "sep.sep": {
+          "time_ms": 0.05,
+          "pct": 0.0
+        },
+        "aten.expand": {
+          "time_ms": 0.05,
+          "pct": 0.0
+        },
+        "sep.sep_backward": {
+          "time_ms": 0.04,
+          "pct": 0.0
+        }
+      }
+    }
+  },
+  "activation_analysis": {
+    "idle_gap_stats": {
+      "min": 0,
+      "max": 2595,
+      "mean": 514.7,
+      "median": 0
+    },
+    "top_15_by_idle_gap": [
+      {
+        "name": "convolution",
+        "idle_gap": 2595,
+        "last_forward_use": "cudnn_batch_norm",
+        "first_backward_use": "cudnn_batch_norm_backward_154"
+      },
+      {
+        "name": "relu_",
+        "idle_gap": 2587,
+        "last_forward_use": "max_pool2d_with_indices",
+        "first_backward_use": "max_pool2d_with_indices_backward"
+      },
+      {
+        "name": "convolution_1",
+        "idle_gap": 2574,
+        "last_forward_use": "cudnn_batch_norm_1",
+        "first_backward_use": "cudnn_batch_norm_backward_153"
+      },
+      {
+        "name": "relu__1",
+        "idle_gap": 2564,
+        "last_forward_use": "convolution_2",
+        "first_backward_use": "convolution_backward_152"
+      },
+      {
+        "name": "convolution_2",
+        "idle_gap": 2558,
+        "last_forward_use": "cudnn_batch_norm_2",
+        "first_backward_use": "cudnn_batch_norm_backward_152"
+      },
+      {
+        "name": "relu__2",
+        "idle_gap": 2548,
+        "last_forward_use": "convolution_3",
+        "first_backward_use": "convolution_backward_151"
+      },
+      {
+        "name": "convolution_3",
+        "idle_gap": 2542,
+        "last_forward_use": "cudnn_batch_norm_3",
+        "first_backward_use": "cudnn_batch_norm_backward_151"
+      },
+      {
+        "name": "getitem_4",
+        "idle_gap": 2534,
+        "last_forward_use": "convolution_4",
+        "first_backward_use": "convolution_backward_150"
+      },
+      {
+        "name": "convolution_4",
+        "idle_gap": 2528,
+        "last_forward_use": "cudnn_batch_norm_4",
+        "first_backward_use": "cudnn_batch_norm_backward_150"
+      },
+      {
+        "name": "convolution_5",
+        "idle_gap": 2510,
+        "last_forward_use": "cudnn_batch_norm_5",
+        "first_backward_use": "cudnn_batch_norm_backward_149"
+      },
+      {
+        "name": "relu__4",
+        "idle_gap": 2500,
+        "last_forward_use": "convolution_6",
+        "first_backward_use": "convolution_backward_148"
+      },
+      {
+        "name": "convolution_6",
+        "idle_gap": 2494,
+        "last_forward_use": "cudnn_batch_norm_6",
+        "first_backward_use": "cudnn_batch_norm_backward_148"
+      },
+      {
+        "name": "relu__3",
+        "idle_gap": 2493,
+        "last_forward_use": "add__9",
+        "first_backward_use": "convolution_backward_149"
+      },
+      {
+        "name": "relu__5",
+        "idle_gap": 2484,
+        "last_forward_use": "convolution_7",
+        "first_backward_use": "convolution_backward_147"
+      },
+      {
+        "name": "convolution_7",
+        "idle_gap": 2478,
+        "last_forward_use": "cudnn_batch_norm_7",
+        "first_backward_use": "cudnn_batch_norm_backward_147"
+      }
+    ],
+    "top_15_by_size": {
+      "batch_size": 32,
+      "activations": [
+        {
+          "name": "convolution",
+          "size_mb": 98.0,
+          "idle_gap": 2595
+        },
+        {
+          "name": "convolution_3",
+          "size_mb": 98.0,
+          "idle_gap": 2542
+        },
+        {
+          "name": "convolution_4",
+          "size_mb": 98.0,
+          "idle_gap": 2528
+        },
+        {
+          "name": "convolution_7",
+          "size_mb": 98.0,
+          "idle_gap": 2478
+        },
+        {
+          "name": "convolution_10",
+          "size_mb": 98.0,
+          "idle_gap": 2428
+        },
+        {
+          "name": "convolution_11",
+          "size_mb": 50.0,
+          "idle_gap": 2410
+        },
+        {
+          "name": "convolution_13",
+          "size_mb": 50.0,
+          "idle_gap": 2378
+        },
+        {
+          "name": "convolution_14",
+          "size_mb": 50.0,
+          "idle_gap": 2364
+        },
+        {
+          "name": "convolution_17",
+          "size_mb": 50.0,
+          "idle_gap": 2314
+        },
+        {
+          "name": "convolution_20",
+          "size_mb": 50.0,
+          "idle_gap": 2264
+        },
+        {
+          "name": "convolution_23",
+          "size_mb": 50.0,
+          "idle_gap": 2214
+        },
+        {
+          "name": "convolution_26",
+          "size_mb": 50.0,
+          "idle_gap": 2164
+        },
+        {
+          "name": "convolution_29",
+          "size_mb": 50.0,
+          "idle_gap": 2114
+        },
+        {
+          "name": "convolution_32",
+          "size_mb": 50.0,
+          "idle_gap": 2064
+        },
+        {
+          "name": "convolution_35",
+          "size_mb": 50.0,
+          "idle_gap": 2014
+        }
+      ]
+    },
+    "top_15_ac_candidates": {
+      "batch_size": 32,
+      "note": "Ranked by size_mb * idle_gap \u2014 activations that are both large and idle longest",
+      "activations": [
+        {
+          "name": "convolution",
+          "size_mb": 98.0,
+          "idle_gap": 2595,
+          "score": 254310.0
+        },
+        {
+          "name": "convolution_3",
+          "size_mb": 98.0,
+          "idle_gap": 2542,
+          "score": 249116.0
+        },
+        {
+          "name": "convolution_4",
+          "size_mb": 98.0,
+          "idle_gap": 2528,
+          "score": 247744.0
+        },
+        {
+          "name": "convolution_7",
+          "size_mb": 98.0,
+          "idle_gap": 2478,
+          "score": 242844.0
+        },
+        {
+          "name": "convolution_10",
+          "size_mb": 98.0,
+          "idle_gap": 2428,
+          "score": 237944.0
+        },
+        {
+          "name": "convolution_11",
+          "size_mb": 50.0,
+          "idle_gap": 2410,
+          "score": 120500.0
+        },
+        {
+          "name": "convolution_13",
+          "size_mb": 50.0,
+          "idle_gap": 2378,
+          "score": 118900.0
+        },
+        {
+          "name": "convolution_14",
+          "size_mb": 50.0,
+          "idle_gap": 2364,
+          "score": 118200.0
+        },
+        {
+          "name": "convolution_17",
+          "size_mb": 50.0,
+          "idle_gap": 2314,
+          "score": 115700.0
+        },
+        {
+          "name": "convolution_20",
+          "size_mb": 50.0,
+          "idle_gap": 2264,
+          "score": 113200.0
+        },
+        {
+          "name": "convolution_23",
+          "size_mb": 50.0,
+          "idle_gap": 2214,
+          "score": 110700.0
+        },
+        {
+          "name": "convolution_26",
+          "size_mb": 50.0,
+          "idle_gap": 2164,
+          "score": 108200.0
+        },
+        {
+          "name": "convolution_29",
+          "size_mb": 50.0,
+          "idle_gap": 2114,
+          "score": 105700.0
+        },
+        {
+          "name": "convolution_32",
+          "size_mb": 50.0,
+          "idle_gap": 2064,
+          "score": 103200.0
+        },
+        {
+          "name": "convolution_35",
+          "size_mb": 50.0,
+          "idle_gap": 2014,
+          "score": 100700.0
+        }
+      ]
+    },
+    "theoretical_max_savings": {
+      "batch_size": 32,
+      "total_activation_memory_mb": 2767.2,
+      "peak_gpu_memory_mb": 6176.8,
+      "activation_pct_of_gpu_peak": 44.8,
+      "note": "If all activations were checkpointed (recomputed instead of stored), this is the maximum memory reduction as a fraction of peak GPU memory."
+    }
+  },
+  "observations": [
+    "Activation memory scales linearly with batch size (per-sample activation memory is roughly constant).",
+    "Backward pass takes ~1.9x longer than forward on average.",
+    "Activations account for 8-18% of positive memory allocations across batch sizes.",
+    "Peak GPU memory at BS=256: 44278 MB.",
+    "Graph has 778 activations with mean idle gap of 515 nodes."
+  ]
+}

@@ -26,6 +26,7 @@ from torchvision.models import resnet18, resnet50, resnet152
 from transformers import BertForSequenceClassification, BertConfig
 from graph_prof import GraphProfiler
 from graph_tracer import SEPFunction, compile
+from phase2 import run_mutwo_algorithm, print_ac_decision, simulate_peak_memory
 
 
 # Available model names for experiments
@@ -213,6 +214,17 @@ class Experiment:
                 model_name=self.model_name,
                 batch_size=self.batch_size,
             )  # Output the results
+
+            # Sanity: simulator should roughly match the measured peak with no eviction
+            sim_peak = simulate_peak_memory(graph_profiler, set())
+            print(f"Simulator (no AC): {sim_peak / 1024**2:.1f} MB")
+            print(f"Measured peak:     {graph_profiler.actual_peak_mem / 1024**2:.1f} MB")
+
+            # Run AC with a budget below the measured peak
+            budget = int(graph_profiler.actual_peak_mem * 0.6)
+            print(f"Budget:            {budget / 1024**2:.1f} MB")
+            decision = run_mutwo_algorithm(graph_profiler, budget)
+            print_ac_decision(decision, graph_profiler)
 
         return gm
 

@@ -255,7 +255,6 @@ class GraphProfiler(fx.Interpreter):
         self.peak_node = self.peak_nodes[-1] if self.peak_nodes else None
 
 
-
     def _short_target(self, node):
         if node.op == OP.PLACEHOLDER:
             return "input"
